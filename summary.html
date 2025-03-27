@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .summary-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h3 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="summary-container">
+        <h3>Financial Breakdown Summary</h3>
+        <p><strong>Saving:</strong> $<span id="saving"></span> (<span id="savingPercent"></span>%)</p>
+        <p><strong>Spending:</strong> $<span id="spending"></span> (<span id="spendingPercent"></span>%)</p>
+        <p><strong>Investing:</strong> $<span id="investing"></span> (<span id="investingPercent"></span>%)</p>
+    </div>
+    
+    <script>
+        // Function to get the amount from URL
+        function getQueryParam(param) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Get the amount entered by the user
+        var amount = parseFloat(getQueryParam('amount')) || 1000; // Default value if not provided
+
+        // Calculate percentages
+        var saving = amount * 0.30;
+        var spending = amount * 0.50;
+        var investing = amount * 0.20;
+
+        // Update summary values
+        document.getElementById('saving').textContent = saving.toFixed(2);
+        document.getElementById('spending').textContent = spending.toFixed(2);
+        document.getElementById('investing').textContent = investing.toFixed(2);
+        document.getElementById('savingPercent').textContent = (saving / amount * 100).toFixed(2);
+        document.getElementById('spendingPercent').textContent = (spending / amount * 100).toFixed(2);
+        document.getElementById('investingPercent').textContent = (investing / amount * 100).toFixed(2);
+    </script>
+</body>
+</html>
